@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Symbolic1
 {
-    public class NumericRational<T> : Rational<T>,IComparable<Rational<T>>,IComparisonOperators<NumericRational<T>, NumericRational<T>, bool> where T : IEquatable<T>, IConvertible, IFormattable, IAdditionOperators<T, T, T>, ISubtractionOperators<T, T, T>, IMultiplyOperators<T, T, T>, IComparisonOperators<T, T, bool>, IModulusOperators<T, T, T>, IUnaryNegationOperators<T, T>, IDivisionOperators<T, T, T
+    public class NumericRational<T> : Rational<T>,IComparable<Rational<T>>,IComparisonOperators<NumericRational<T>, NumericRational<T>, bool> where T : IEquatable<T>, IConvertible, IFormattable, IAdditionOperators<T, T, T>, ISubtractionOperators<T, T, T>, IMultiplyOperators<T, T, T>, IComparisonOperators<T, T, bool>, IModulusOperators<T, T, T>, IUnaryNegationOperators<T, T>, IDivisionOperators<T, T, T>
     {
 
         public NumericRational(T newNumerator, T newDenominator) : base(newNumerator, newDenominator)

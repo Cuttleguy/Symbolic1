@@ -4,4 +4,4 @@ using System.Globalization;
 using System.Numerics;
 
 Console.WriteLine("Hello, World!");
-Console.WriteLine(new Rational<Complex>(15, 45).ToString());
+Console.WriteLine(4.5+3);
