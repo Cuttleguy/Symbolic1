@@ -4,4 +4,4 @@ using System.Globalization;
 using System.Numerics;
 
 Console.WriteLine("Hello, World!");
-Console.WriteLine(4.5+3);
+Console.WriteLine(new Fraction(1.0/3.0,16).ToDouble());
