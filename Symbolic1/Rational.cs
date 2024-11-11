@@ -15,7 +15,8 @@ namespace Symbolic1
         IEquatable<Rational<T>>,
         IUnaryNegationOperators<Rational<T>, Rational<T>>,
         IModulusOperators<Rational<T>, Rational<T>, Rational<T>>,
-        IEqualityOperators<Rational<T>,Rational<T>,bool>,IFormattable,
+        IEqualityOperators<Rational<T>,Rational<T>,bool>,
+        IFormattable,
         IPowerFunctions<Rational<T>>,
         IDivisionOperators<Rational<T>, Rational<T>, Rational<T>>,
         IAdditionOperators<Rational<T>, Rational<T>, Rational<T>>, 
@@ -25,7 +26,10 @@ namespace Symbolic1
         IExponentialFunctions<Rational<T>>,
         ILogarithmicFunctions<Rational<T>>,
         ITrigonometricFunctions<Rational<T>>,
-        IHyperbolicFunctions<Rational<T>>
+        IHyperbolicFunctions<Rational<T>>,
+        IConvertible,
+        IAdditionOperators<Rational<T>,T,Rational<T>>
+        
         where T : IEquatable<T>, 
         IFormattable, 
         IAdditionOperators<T, T, T>, 
@@ -40,7 +44,9 @@ namespace Symbolic1
         ITrigonometricFunctions<T>,
         IHyperbolicFunctions<T>,
         ILogarithmicFunctions<T>,
-        IExponentialFunctions<T>
+        IExponentialFunctions<T>,
+        IAdditionOperators<T,double,T>,
+        IConvertible
     {
         public T numerator;
         public T denominator;
@@ -101,12 +107,12 @@ namespace Symbolic1
         
         public override string ToString()
         {
-            return "(" + numerator.ToString() + ") / (" + denominator.ToString() + ")";
+            return numerator.ToString() + " / " + denominator.ToString();
 
         }
         public string ToString(string? format, IFormatProvider? formatProvider)
         {
-            return "("+numerator.ToString(format, formatProvider)+ ") / (" + denominator.ToString(format, formatProvider)+")"; 
+            return numerator.ToString(format, formatProvider)+ " / " + denominator.ToString(format, formatProvider); 
         }
 
         public static Rational<T> Pow(Rational<T> x, Rational<T> y)
@@ -462,6 +468,92 @@ namespace Symbolic1
             return new Rational<T>(T.Log2(x.numerator / x.denominator), T.One);
         }
 
+        public TypeCode GetTypeCode()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ToBoolean(IFormatProvider? provider)
+        {
+            throw new NotImplementedException();
+        }
+
+        public byte ToByte(IFormatProvider? provider)
+        {
+            throw new NotImplementedException();
+        }
+
+        public char ToChar(IFormatProvider? provider)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DateTime ToDateTime(IFormatProvider? provider)
+        {
+            throw new NotImplementedException();
+        }
+
+        public decimal ToDecimal(IFormatProvider? provider)
+        {
+            return (numerator / denominator).ToDecimal(provider);
+        }
+
+        public double ToDouble(IFormatProvider? provider)
+        {
+            return (numerator / denominator).ToDouble(provider);
+        }
+
+        public short ToInt16(IFormatProvider? provider)
+        {
+            return (numerator / denominator).ToInt16(provider);
+        }
+
+        public int ToInt32(IFormatProvider? provider)
+        {
+            return (numerator / denominator).ToInt32(provider);
+        }
+
+        public long ToInt64(IFormatProvider? provider)
+        {
+            return (numerator / denominator).ToInt64(provider);
+        }
+
+        public sbyte ToSByte(IFormatProvider? provider)
+        {
+            return (numerator / denominator).ToSByte(provider);
+        }
+
+        public float ToSingle(IFormatProvider? provider)
+        {
+            return (numerator / denominator).ToSingle(provider);
+        }
+
+        public string ToString(IFormatProvider? provider)
+        {
+            return numerator.ToString(provider)+" / "+denominator.ToString(provider); 
+        }
+
+        public object ToType(Type conversionType, IFormatProvider? provider)
+        {
+            return (numerator / denominator).ToType(conversionType,provider);
+        }
+
+        public ushort ToUInt16(IFormatProvider? provider)
+        {
+            return (numerator / denominator).ToUInt16(provider);
+        }
+
+        public uint ToUInt32(IFormatProvider? provider)
+        {
+            return (numerator / denominator).ToUInt32(provider);
+
+        }
+
+        public ulong ToUInt64(IFormatProvider? provider)
+        {
+            return (numerator / denominator).ToUInt64(provider);
+        }
+
         public static Rational<T> operator +(Rational<T> left, Rational<T> right)
         {
             return new Rational<T>(left.numerator*right.denominator+right.numerator*left.denominator,left.denominator*right.denominator);
@@ -542,6 +634,11 @@ namespace Symbolic1
         public static Rational<T> operator +(Rational<T> value)
         {
             return value;
+        }
+
+        public static Rational<T> operator +(Rational<T> left, T right)
+        {
+            return left + new Rational<T>(right, T.One);
         }
     }
 }
